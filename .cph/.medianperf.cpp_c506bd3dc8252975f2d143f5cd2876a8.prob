@@ -1,0 +1,1 @@
+{"name":"Local: medianperf","url":"/mnt/c/Users/joker/Documents/vscode/CP/medianperf.cpp","tests":[{"id":1646466909618,"input":"10 7\n38 62 40 64 91 59 22 48 84 45","output":"1"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/mnt/c/Users/joker/Documents/vscode/CP/medianperf.cpp","group":"local","local":true}

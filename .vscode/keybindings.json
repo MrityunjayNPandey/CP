@@ -1,0 +1,23 @@
+[
+  {
+    "key": "ctrl+1",
+    "command": "workbench.action.tasks.runTask",
+    "args": "CF-Menu"
+  },
+  {
+    "key": "ctrl+alt+j",
+    "command": "workbench.action.tasks.runTask",
+    "args": "CF-LastSubmission"
+  },
+  {
+    "key": "ctrl+2",
+    "command": "workbench.action.tasks.runTask",
+    "args": "CF-MenuContest"
+  },
+  {
+    "key": "ctrl+alt+f",
+    "command": "workbench.action.tasks.runTask",
+    "args": "CF-Submit",
+    "when": "editorTextFocus"
+  }
+]

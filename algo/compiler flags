@@ -1,0 +1,1 @@
+-DDEBUG -std=gnu++2a -g3 -fsanitize=address -fno-omit-frame-pointer -fsanitize=undefined -fno-sanitize-recover -fstack-protector

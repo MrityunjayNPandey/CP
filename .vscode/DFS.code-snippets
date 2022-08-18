@@ -1,0 +1,22 @@
+{
+  "DFS": {
+    "prefix": "DFS",
+    "body": [
+      "// DFS, time complexity of O(V+E)",
+      "//Remember to clear the maps in main() if multiple test cases exist.",
+      "unordered_map<int, bool> visited;",
+      "unordered_map<int, vector<int>> adj_list; //adjacency list",
+      "map<pair<int, int>, int> adj_weight; //to add weights on edges",
+      "void DFS(int current)",
+      "{",
+      "    visited[current] = true;",
+      "    for (int next_vertex : adj_list[current])",
+      "        if (!visited[next_vertex])",
+      "        {",
+      "            DFS(next_vertex);",
+      "        }",
+      "}"
+    ],
+    "description": "DFS"
+  }
+}

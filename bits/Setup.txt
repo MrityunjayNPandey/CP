@@ -1,0 +1,5 @@
+Remember to precompile without any flags in UBUNTU gcc, it will be c++14 as default. Other versions of c++ 
+are not able to precompile.
+for UBUNTU:
+cd /usr/include/x86_64-linux-gnu/c++/9/bits
+g++ stdc++.h

@@ -1,0 +1,1 @@
+{"name":"Local: reduce_to_0","url":"/mnt/c/Users/joker/Documents/vscode/CP/reduce_to_0.cpp","tests":[{"id":1654931495948,"input":"2\n12 48\n999999999 999999999","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/mnt/c/Users/joker/Documents/vscode/CP/reduce_to_0.cpp","group":"local","local":true}

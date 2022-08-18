@@ -1,0 +1,80 @@
+/**
+*      codeforces: _joKer_0
+*      codechef:  joker_0000
+*      created: 04-05-2022 22:28:41
+**/
+#include <bits/stdc++.h>
+using namespace std;
+#define endl "\n"
+#ifdef DEBUG
+#include "algo/debug.h"
+#else
+#define debug(...) 
+#define dclear(x)
+#endif
+#define free freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);freopen("error.txt","w",stderr);
+#define all(x) x.begin(), x.end()
+#define rall(x) x.rbegin(), x.rend()
+#define pb push_back
+#define LOG(n) 31 - __builtin_clz(n)
+const long long INF = 1ll << 32; const long long MAX_N = 1e6 + 7;
+const long long MOD = 1e9 + 7; const long long mod = 998244353;
+#define int long long
+
+void solve()
+{
+    int n = 0, m = 0, k = 0, ans = 0, cnt = 0, sum = 0;
+    string str;
+    cin >> str;
+    vector<int> pref;
+    map<int, vector<int>> mp;
+    for(int i = 0; i < str.length(); i++)
+    {
+        if(str[i] == '(')
+            sum++;
+        else
+            sum--;
+        pref.pb(sum);
+        mp[sum].pb(i);
+    }
+    cnt = str.length();
+    debug(pref)
+        for(int i = str.length() - 1; i >= 0; i--)
+        {
+            if(mp.count(pref[i] + 1))
+            {
+                for(auto j : mp[pref[i] + 1])
+                {
+                    if(j >= i)
+                        break;
+                    if(str[j] == '(')
+                    {
+                        k = j;
+                        ans++;
+                        cnt -= i - k + 1;
+                        debug(cnt)
+                            i = k;
+                        break;
+                    }
+                }
+            }
+        }
+    cout << cnt << " " << ans;
+}
+
+signed main()
+{
+    ios::sync_with_stdio(false); cin.tie(0);
+#ifdef SUBLIME
+    free
+#endif
+        int Test = 1;
+    cin >> Test;
+    for(int I = 1; I <= Test; I++)
+    {
+        dclear(I);
+        solve();
+        cout << endl;
+    }
+}
+

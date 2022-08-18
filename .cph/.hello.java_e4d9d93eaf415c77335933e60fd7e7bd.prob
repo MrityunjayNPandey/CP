@@ -1,0 +1,1 @@
+{"name":"Local: hello","url":"/mnt/c/Users/joker/Documents/vscode/CP/hello.java","tests":[{"id":1647796723151,"input":"","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/mnt/c/Users/joker/Documents/vscode/CP/hello.java","group":"local","local":true}

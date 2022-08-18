@@ -1,0 +1,1 @@
+{"name":"Local: A_Casimir_s_String_Solitaire","url":"c:\\Users\\joker\\Documents\\vscode\\CP\\A_Casimir_s_String_Solitaire.cpp","tests":[{"id":1644881086268,"input":"4 4","output":"234\n43\n34\n43"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\joker\\Documents\\vscode\\CP\\A_Casimir_s_String_Solitaire.cpp","group":"local","local":true}

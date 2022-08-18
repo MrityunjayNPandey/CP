@@ -1,0 +1,10 @@
+/usr/include/x86_64-linux-gnu/c++/9/bits
+
+run this in commandline : (environmental variables)
+
+export ASAN_SYMBOLIZER_PATH = / usr / bin / llvm - symbolizer - 3.4
+export ASAN_OPTIONS = symbolize = 1
+
+sudo g++ -DDEBUG -std=gnu++2a -g3 -fsanitize=address -fno-omit-frame-pointer -fsanitize=undefined -fno-sanitize-recover -fstack-protector stdc++.h
+
+add compiler flags accordingly
