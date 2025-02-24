@@ -13,7 +13,6 @@ using namespace __gnu_pbds;
 #define free freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);freopen("error.txt","w",stderr);
 #define all(x) x.begin(), x.end()
 #define rall(x) x.rbegin(), x.rend()
-#define pb push_back
 #define LOG(n) 63 - __builtin_clzll(n)
 const long long MAX_N = 1e6 + 7; const long long MOD = 1e9 + 7; const long long mod = 998244353; const long long INF = LONG_LONG_MAX;
 typedef tree<int, null_type, less_equal<int>, rb_tree_tag, tree_order_statistics_node_update> ordered_multiset;

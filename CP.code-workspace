@@ -82,7 +82,8 @@
       "valarray": "cpp",
       "variant": "cpp",
       "cstdbool": "cpp",
-      "__config": "cpp"
+      "__config": "cpp",
+      "__split_buffer": "cpp"
     }
   }
 }
