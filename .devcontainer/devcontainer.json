@@ -5,11 +5,14 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "postCreateCommand": "bash -i .devcontainer/configureZSH.sh",
-
+  "postCreateCommand": "bash -i .devcontainer/configureZSH.sh && .devcontainer/installEssentials.sh",
   "customizations": {
     "vscode": {
-      "extensions": ["DivyanshuAgrawal.competitive-programming-helper", "Gruntfuggly.auto-snippet"],
+      "extensions": [
+        "DivyanshuAgrawal.competitive-programming-helper",
+        "Gruntfuggly.auto-snippet",
+        "ms-vscode.cpptools-extension-pack"
+      ],
       "settings": {
         "editor.tabSize": 4,
         "editor.fontLigatures": true,
@@ -31,6 +34,11 @@
           "source.fixAll": true,
           "source.organizeImports": true,
           "source.sortMembers": true
+        },
+        "C_Cpp.clang_format_style": "{BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 120}",
+        "C_Cpp.formatting": "clangFormat",
+        "[cpp]": {
+          "editor.defaultFormatter": "ms-vscode.cpptools"
         },
         "autoSnippet.snippets": [
           {
