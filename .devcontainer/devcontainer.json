@@ -13,7 +13,7 @@
 
   "customizations": {
     "vscode": {
-      "extensions": ["DivyanshuAgrawal.competitive-programming-helper"],
+      "extensions": ["DivyanshuAgrawal.competitive-programming-helper", "Gruntfuggly.auto-snippet"],
       "settings": {
         "editor.tabSize": 4,
         "editor.fontLigatures": true,
@@ -35,7 +35,13 @@
           "source.fixAll": true,
           "source.organizeImports": true,
           "source.sortMembers": true
-        }
+        },
+        "autoSnippet.snippets": [
+          {
+            "pattern": "**/*.cpp",
+            "snippet": "TEMPLATE"
+          }
+        ]
       }
     }
   }
