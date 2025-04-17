@@ -5,10 +5,6 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "features": {
-    "ghcr.io/devcontainers/features/git:1": {},
-    "ghcr.io/devcontainers-extra/features/gh-cli:1": {}
-  },
   "postCreateCommand": "bash -i .devcontainer/configureZSH.sh",
 
   "customizations": {
