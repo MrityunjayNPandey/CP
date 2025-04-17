@@ -1,0 +1,42 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/cpp
+{
+  "name": "C++",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers-extra/features/gh-cli:1": {}
+  },
+  "postCreateCommand": "bash -i .devcontainer/configureZSH.sh",
+
+  "customizations": {
+    "vscode": {
+      "extensions": ["DivyanshuAgrawal.competitive-programming-helper"],
+      "settings": {
+        "editor.tabSize": 4,
+        "editor.fontLigatures": true,
+        //install fonts manually from: https://www.nerdfonts.com/
+        "editor.fontFamily": "'Cascadia Code', Consolas",
+        "terminal.integrated.fontFamily": "MesloLGS NF",
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+          },
+          "zsh": {
+            "path": "zsh"
+          }
+        },
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll": true,
+          "source.organizeImports": true,
+          "source.sortMembers": true
+        }
+      }
+    }
+  }
+}
