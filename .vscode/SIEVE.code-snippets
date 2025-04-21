@@ -6,7 +6,6 @@
       "vector<int> primeTemp(MAX_N+1, 1), isPrime(MAX_N+1, 0), prime;",
       "void SIEVE()",
       "{",
-      "    isPrime[1]++;",
       "    for(int p = 2; p <= MAX_N; p++)",
       "    {",
       "        if(primeTemp[p] == 1)",

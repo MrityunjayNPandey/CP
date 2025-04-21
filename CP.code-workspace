@@ -88,7 +88,8 @@
       "__hash_table": "cpp",
       "__tree": "cpp",
       "queue": "cpp",
-      "ios": "cpp"
+      "ios": "cpp",
+      "span": "cpp"
     }
   }
 }
