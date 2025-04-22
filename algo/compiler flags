@@ -1,1 +1,1 @@
--DDEBUG -std=c++20 -g3 -fsanitize=address -fno-omit-frame-pointer -fsanitize=undefined -fno-sanitize-recover -fstack-protector
+-DDEBUG -std=c++20 -g3 -fsanitize=address -fno-omit-frame-pointer -fsanitize=undefined -fno-sanitize-recover -fstack-protector -Og
