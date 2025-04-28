@@ -1,6 +1,7 @@
 {
   "C_Cpp.errorSquiggles": "Disabled",
   "files.associations": {
+    "*.json": "jsonc",
     "iosfwd": "cpp",
     "iostream": "cpp",
     "array": "cpp",
@@ -74,7 +75,9 @@
     "typeindex": "cpp",
     "typeinfo": "cpp",
     "valarray": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "ranges": "cpp",
+    "span": "cpp"
   },
   "python.formatting.provider": "yapf"
 }
