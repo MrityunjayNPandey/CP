@@ -1,4 +1,8 @@
-// balanced because of random priorities
+/**
+ *  balanced because of random priorities
+ *  merging and splitting is based on the number of nodes. Change it to value to get BST (don't touch the merge
+ * function. Do change in split and insert)
+ *  */
 class Treap {
     struct TreapNode {
         int value, priority, toProp;
@@ -70,7 +74,7 @@ class Treap {
         }
     }
 
-    pair<TreapNode *, TreapNode *> split(TreapNode *root, int leftSegSize) {
+    pair<TreapNode *, TreapNode *> split(TreapNode *root, int leftTreeSize) {
         if (!root) {
             return {nullptr, nullptr};
         }
@@ -78,13 +82,13 @@ class Treap {
         TreapNode *l = root->children.first;
         TreapNode *r = root->children.second;
         int lSize = l ? l->subTreeSize : 0;
-        if (lSize >= leftSegSize) {
-            auto [lSegHead, rSegHead] = split(l, leftSegSize);
+        if (lSize >= leftTreeSize) {
+            auto [lSegHead, rSegHead] = split(l, leftTreeSize);
             root->children.first = rSegHead;
             root->reCalc();
             return {lSegHead, root};
         } else {
-            auto [lSegHead, rSegHead] = split(r, leftSegSize - lSize - 1);
+            auto [lSegHead, rSegHead] = split(r, leftTreeSize - lSize - 1);
             root->children.second = lSegHead;
             root->reCalc();
             return {root, rSegHead};
