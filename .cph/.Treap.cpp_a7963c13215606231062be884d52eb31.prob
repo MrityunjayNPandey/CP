@@ -1,0 +1,1 @@
+{"name":"Local: Treap","url":"/workspaces/CP/Treap.cpp","tests":[{"id":1745880491415,"input":"100\na 1\na 2\na 3\ne 2\na 4\na 5\na 6\na 7\na 8\na 9\ne 0\ne 0\ni 8 0\nq 0 0\nq 1 4\nq 2 6\nq 5 6\nr 0 6 1\nq 0 2\nf 0 5\nq 5 6\nq 1 4\nq 0 1\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/workspaces/CP/Treap.cpp","group":"local","local":true}
