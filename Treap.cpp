@@ -31,7 +31,10 @@ typedef tree<pair<int, int>, null_type, less<pair<int, int>>, rb_tree_tag, tree_
 #define int long long
 int I = 0, Test = 1;
 
-// balanced because of random priorities
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+/**
+ *  balanced because of random priorities
+ *  */
 class Treap {
     struct TreapNode {
         int value, priority, toProp;
@@ -86,6 +89,25 @@ class Treap {
         };
     };
 
+    TreapNode *root = nullptr;
+
+    void freeTreap(TreapNode *root) {
+        if (!root) return;
+        freeTreap(root->children.first);
+        freeTreap(root->children.second);
+        delete root;
+    }
+
+    void inorderTraversal(TreapNode *root, auto &v) {
+        if (!root) {
+            return;
+        }
+        root->lazyPropagate();
+        inorderTraversal(root->children.first, v);
+        v.push_back(root->value);
+        inorderTraversal(root->children.second, v);
+    }
+
     TreapNode *merge(TreapNode *p1, TreapNode *p2) {
         if (!p1 || !p2) {
             return p1 ? p1 : p2;
@@ -103,7 +125,8 @@ class Treap {
         }
     }
 
-    pair<TreapNode *, TreapNode *> split(TreapNode *root, int leftSegSize) {
+    // <leftTreeSize and <=leftTreeSize
+    pair<TreapNode *, TreapNode *> split(TreapNode *root, int leftTreeSize) {
         if (!root) {
             return {nullptr, nullptr};
         }
@@ -111,35 +134,71 @@ class Treap {
         TreapNode *l = root->children.first;
         TreapNode *r = root->children.second;
         int lSize = l ? l->subTreeSize : 0;
-        if (lSize >= leftSegSize) {
-            auto [lSegHead, rSegHead] = split(l, leftSegSize);
-            root->children.first = rSegHead;
-            root->reCalc();
-            return {lSegHead, root};
-        } else {
-            auto [lSegHead, rSegHead] = split(r, leftSegSize - lSize - 1);
+        if (lSize + 1 <= leftTreeSize) {
+            auto [lSegHead, rSegHead] = split(r, leftTreeSize - lSize - 1);
             root->children.second = lSegHead;
             root->reCalc();
             return {root, rSegHead};
+        } else {
+            auto [lSegHead, rSegHead] = split(l, leftTreeSize);
+            root->children.first = rSegHead;
+            root->reCalc();
+            return {lSegHead, root};
         }
     }
 
-    void freeTreap(TreapNode *root) {
-        if (!root) return;
-        freeTreap(root->children.first);
-        freeTreap(root->children.second);
-        delete root;
-    }
-
-    TreapNode *root = nullptr;
-
-    void printTreap(TreapNode *root) {
+    // <=k and >k
+    pair<TreapNode *, TreapNode *> splitByValue(TreapNode *root, int k) {
         if (!root) {
-            return;
+            return {nullptr, nullptr};
         }
-        printTreap(root->children.first);
-        cout << root->value << " ";
-        printTreap(root->children.second);
+        root->lazyPropagate();
+        TreapNode *l = root->children.first;
+        TreapNode *r = root->children.second;
+        if (root->value <= k) {
+            auto [lSegHead, rSegHead] = splitByValue(r, k);
+            root->children.second = lSegHead;
+            root->reCalc();
+            return {root, rSegHead};
+        } else {
+            auto [lSegHead, rSegHead] = splitByValue(l, k);
+            root->children.first = rSegHead;
+            root->reCalc();
+            return {lSegHead, root};
+        }
+    }
+
+    void insertByValue(TreapNode *&node, int x) {
+        TreapNode *newNode = new TreapNode(x);
+        // SplitByValue the tree into <=x and >x
+        auto [l, r] = splitByValue(node, x - 1);
+        node = merge(merge(l, newNode), r);
+    }
+
+    void insertByNode(TreapNode *&node, TreapNode *newNode) {
+        // SplitByValue the tree into <=x and >x
+        auto [l, r] = splitByValue(node, newNode->value - 1);
+        node = merge(merge(l, newNode), r);
+    }
+
+    TreapNode *orderedMerge(TreapNode *p1, TreapNode *p2) {
+        if (!p1 || !p2) {
+            return p1 ? p1 : p2;
+        }
+        p1->lazyPropagate();
+        p2->lazyPropagate();
+        auto &[l, r] = p2->children;
+
+        if (l) {
+            p1 = orderedMerge(p1, l);
+        }
+        if (r) {
+            p1 = orderedMerge(p1, r);
+        }
+
+        p2->children = {nullptr, nullptr};
+        insertByNode(p1, p2);
+        return p1;
     }
 
    public:
@@ -150,6 +209,8 @@ class Treap {
         root = merge(root, newNode);
     }
 
+    void orderedInsert(int x) { insertByValue(root, x); }
+
     void insertAt(int x, int index) {
         TreapNode *newNode = new TreapNode(x);
         auto [l, r] = split(root, index);
@@ -157,7 +218,7 @@ class Treap {
         root = merge(updatedSegment, r);
     }
 
-    void erase(int index) {  // 0 based index input
+    void eraseByIndex(int index) {  // 0 based index input
         auto [l, r] = split(root, index + 1);
         TreapNode *toDelete = nullptr;
         auto [l1, r1] = split(l, index);
@@ -166,9 +227,19 @@ class Treap {
         freeTreap(toDelete);
     }
 
-    void printTreap() {
-        printTreap(root);
-        cout << endl;
+    void eraseByValue(int k) {  // 0 based index input
+        auto [l, r] = splitByValue(root, k);
+        TreapNode *toDelete = nullptr;
+        auto [l1, r1] = splitByValue(l, k - 1);
+        toDelete = r1;
+        root = merge(l1, r);
+        freeTreap(toDelete);
+    }
+
+    vector<int> getTreapVector() {
+        vector<int> vTreap;
+        inorderTraversal(root, vTreap);
+        return vTreap;
     }
 
     void flipRange(int l, int r) {  // 0 based index input
@@ -209,22 +280,22 @@ void solve() {
         int y, r, num;
         cin >> x >> y;
         if (x == 'a') {
-            treap.insert(y);
-            treap.printTreap();
+            treap.orderedInsert(y);
+            debug(treap.getTreapVector());
         }
         if (x == 'i') {
             cin >> r;
             treap.insertAt(y, r);
-            treap.printTreap();
+            debug(treap.getTreapVector());
         }
         if (x == 'e') {
-            treap.erase(y);
-            treap.printTreap();
+            treap.eraseByValue(y);
+            debug(treap.getTreapVector());
         }
         if (x == 'r') {
             cin >> r >> num;
             treap.rangeAdd(y, r, num);
-            treap.printTreap();
+            debug(treap.getTreapVector());
         }
         if (x == 'q') {
             cin >> r;
@@ -233,11 +304,10 @@ void solve() {
         if (x == 'f') {
             cin >> r;
             treap.flipRange(y, r);
-            treap.printTreap();
+            debug(treap.getTreapVector());
         }
     }
 }
-
 
 signed main() {
     ios::sync_with_stdio(false);
