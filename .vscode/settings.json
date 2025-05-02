@@ -77,7 +77,13 @@
     "valarray": "cpp",
     "variant": "cpp",
     "ranges": "cpp",
-    "span": "cpp"
+    "span": "cpp",
+    "compare": "cpp",
+    "concepts": "cpp",
+    "coroutine": "cpp",
+    "numbers": "cpp",
+    "stop_token": "cpp"
   },
-  "python.formatting.provider": "yapf"
+  "python.formatting.provider": "yapf",
+  "cph.general.timeOut": 15000
 }

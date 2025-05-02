@@ -4,8 +4,7 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
  *  */
 class Treap {
     struct TreapNode {
-        int value, priority, toProp;
-        bool toFlip;
+        int value, priority, toProp, toFlip;
         pair<TreapNode *, TreapNode *> children;
         int subTreeSize;
         int sum;  // computed value
@@ -40,7 +39,7 @@ class Treap {
                 toProp = 0;
             }
 
-            if (toFlip) {
+            if (toFlip & 1) {
                 children = {r, l};
                 toFlip = 0;
             }
@@ -49,9 +48,9 @@ class Treap {
         TreapNode(int data) {
             value = data;
             toProp = 0;
-            toFlip = false;
+            toFlip = 0;
             children = {nullptr, nullptr};
-            priority = (rand() << 16) ^ rand();
+            priority = rng();
             reCalc();
         };
     };
@@ -92,7 +91,7 @@ class Treap {
         }
     }
 
-    // <leftTreeSize and <=leftTreeSize
+    // <=leftTreeSize and <leftTreeSize
     pair<TreapNode *, TreapNode *> split(TreapNode *root, int leftTreeSize) {
         if (!root) {
             return {nullptr, nullptr};
@@ -209,11 +208,21 @@ class Treap {
         return vTreap;
     }
 
+    void debugTreap() {
+#ifdef DEBUG
+        auto treap = getTreapVector();
+        for (auto &i : treap) {
+            clog << i->value << " ";
+        }
+        clog << endl;
+#endif
+    }
+
     void flipRange(int l, int r) {  // 0 based index input
         int _1stSection = l, _2ndSection = r - l + 1;
         auto [_1st, _2ndMain] = split(root, _1stSection);
         auto [_2nd, _3rd] = split(_2ndMain, _2ndSection);
-        _2nd->toFlip = true;
+        _2nd->toFlip++;
         root = merge(_1st, _2nd);
         root = merge(root, _3rd);
     }
