@@ -1,0 +1,1 @@
+{"name":"Local: Untitled-1","url":"/workspaces/CP/Untitled-1.cpp","tests":[{"id":1746248022964,"input":"19","output":"True"},{"id":1746248105147,"input":"2","output":"False"},{"id":1746248118897,"input":"7","output":"True"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/workspaces/CP/Untitled-1.cpp","group":"local","local":true}
