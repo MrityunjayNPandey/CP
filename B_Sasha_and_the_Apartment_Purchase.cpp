@@ -1,7 +1,7 @@
 /**
  *      codeforces: _joKer_0
  *      leetcode:  joKer0
- *      created: 13-05-2025 15:00:49
+ *      created: 08-05-2025 17:49:54
  **/
 #include <bits/stdc++.h>
 
@@ -31,30 +31,37 @@ typedef tree<pair<int, int>, null_type, less<pair<int, int> >, rb_tree_tag, tree
 #define int long long
 int I = 0, Test = 1;
 
-long getMinRequests(vector<int> request, vector<int> health, int k) {
-    int cnt = 0, sum = 0;
-    for (auto &i : request) {
-        sum += i;
-    }
-    vector<pair<int, int>> vp;
-    for (int i = 0; i<health.size(); i++) {
-        vp.push_back({request[i], health[i]});
-    }
-    sort(vp.rbegin(), vp.rend());
-    int ans = 0;
-    for(auto &[l, r]: vp){
-        cnt = (r + k - 1) / k;
-        ans += cnt * sum;
-        sum -= l;
-    }
-    return ans + 1;
-}
+/**
+ * 1 2 5 9 10 13
+ *
+ *
+ *
+ *
+ *
+ */
 
 void solve() {
     int n = 0, m = 0, k = 0, ans = 0, cnt = 0, sum = 0;
-    vector<int> req = {1, 10, 1};
-    vector<int> health = {2, 5, 2};
-    debug(getMinRequests(req, health, 2))
+    cin >> n >> k;
+    vector<int> v(n);
+    for (auto &i : v) {
+        cin >> i;
+    }
+    sort(v.begin(), v.end());
+    int x = (n - k) / 2;
+    set<int> st;
+    if ((n - k) & 1) {
+        st.insert(v[x]);
+        st.insert(v[k + x]);
+    } else {
+        st.insert(v[x - 1]);
+        st.insert(v[k + x]);
+    }
+    if (st.size() == 2) {
+        cout << *st.rbegin() - *st.begin() + 1;
+    } else {
+        cout << 1;
+    }
 }
 
 signed main() {

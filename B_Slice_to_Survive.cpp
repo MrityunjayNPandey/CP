@@ -1,7 +1,7 @@
 /**
  *      codeforces: _joKer_0
  *      leetcode:  joKer0
- *      created: 13-05-2025 15:00:49
+ *      created: 17-05-2025 20:17:30
  **/
 #include <bits/stdc++.h>
 
@@ -31,30 +31,36 @@ typedef tree<pair<int, int>, null_type, less<pair<int, int> >, rb_tree_tag, tree
 #define int long long
 int I = 0, Test = 1;
 
-long getMinRequests(vector<int> request, vector<int> health, int k) {
-    int cnt = 0, sum = 0;
-    for (auto &i : request) {
-        sum += i;
+/**
+ * 11
+ *  5 9 8
+ *  3 5 4
+ *  2 3 2
+ *  1 2 1
+ *    1
+ */
+
+int getCuts(int x) {
+    int cnt = 0;
+    while (x > 1) {
+        x = (x + 1) / 2;
+        cnt++;
     }
-    vector<pair<int, int>> vp;
-    for (int i = 0; i<health.size(); i++) {
-        vp.push_back({request[i], health[i]});
-    }
-    sort(vp.rbegin(), vp.rend());
-    int ans = 0;
-    for(auto &[l, r]: vp){
-        cnt = (r + k - 1) / k;
-        ans += cnt * sum;
-        sum -= l;
-    }
-    return ans + 1;
+    return cnt;
 }
 
 void solve() {
     int n = 0, m = 0, k = 0, ans = 0, cnt = 0, sum = 0;
-    vector<int> req = {1, 10, 1};
-    vector<int> health = {2, 5, 2};
-    debug(getMinRequests(req, health, 2))
+    int a, b;
+    cin >> n >> m >> a >> b;
+    int x = min(a, n - a + 1);
+    int y = min(b, m - b + 1);
+    debug(x, y, n, m, a, b);
+    int minXCuts = 1 + getCuts(x);
+    int minYCuts = 1 + getCuts(y);
+    int nCuts = getCuts(n);
+    int mCuts = getCuts(m);
+    cout << min(minXCuts + mCuts, minYCuts + nCuts);
 }
 
 signed main() {

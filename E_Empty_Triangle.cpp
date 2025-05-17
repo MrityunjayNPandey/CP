@@ -1,14 +1,13 @@
 /**
  *      codeforces: _joKer_0
  *      leetcode:  joKer0
- *      created: 13-05-2025 15:00:49
+ *      created: 12-05-2025 23:38:16
  **/
 #include <bits/stdc++.h>
 
 #include <ext/pb_ds/assoc_container.hpp>
 using namespace std;
 using namespace __gnu_pbds;
-#define endl "\n"
 #ifdef DEBUG
 #include "algo/debug.h"
 #else
@@ -31,30 +30,45 @@ typedef tree<pair<int, int>, null_type, less<pair<int, int> >, rb_tree_tag, tree
 #define int long long
 int I = 0, Test = 1;
 
-long getMinRequests(vector<int> request, vector<int> health, int k) {
-    int cnt = 0, sum = 0;
-    for (auto &i : request) {
-        sum += i;
-    }
-    vector<pair<int, int>> vp;
-    for (int i = 0; i<health.size(); i++) {
-        vp.push_back({request[i], health[i]});
-    }
-    sort(vp.rbegin(), vp.rend());
-    int ans = 0;
-    for(auto &[l, r]: vp){
-        cnt = (r + k - 1) / k;
-        ans += cnt * sum;
-        sum -= l;
-    }
-    return ans + 1;
-}
+/**
+ *.   .
+ *  .
+ *  .
+ *  .
+ *  .
+ *  .
+ *  .
+ *  .
+ *  .
+ *  .
+ *  .
+ *  .
+ *  .
+ *  .
+ */
 
 void solve() {
-    int n = 0, m = 0, k = 0, ans = 0, cnt = 0, sum = 0;
-    vector<int> req = {1, 10, 1};
-    vector<int> health = {2, 5, 2};
-    debug(getMinRequests(req, health, 2))
+    int n = 0, m = 0, ans = 0, cnt = 0, sum = 0;
+    cin >> n;
+    int i = 1, j = 2, k = 3;
+    int p = 100;
+    while (p--) {
+        cout << "?" << " " << i << " " << j << " " << k << endl;
+        int x;
+        cin >> x;
+        if (x == 0) {
+            cout << "!" << " " << i << " " << j << " " << k << endl;
+            return;
+        }
+        int p = rand() % 3 + 1;
+        if (p == 1) {
+            i = x;
+        } else if (p == 2) {
+            j = x;
+        } else {
+            k = x;
+        }
+    }
 }
 
 signed main() {
